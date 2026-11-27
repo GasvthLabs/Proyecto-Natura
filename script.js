@@ -186,7 +186,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Huemul_Fase2.jpg",
         imagenPie: "FIG 2.3 — Registro fotográfico forense de un Huemul en Fase 2 con masas tumorales dorsales y deformidad craneal.",
-        modeloGLB: null, // Reemplazar por ej. "models/huemul.glb"
+        modeloGLB: "models/Modelo_Huemul.glb", // Reemplazar por ej. "models/huemul.glb"
         tipoHolograma: "fase2"
     },
     {
