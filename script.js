@@ -52,7 +52,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Compuesto.jpg",
         imagenPie: "FIG 0.1 — Evidencia visual del primer vial del compuesto 001 estable.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Compuesto.glb",
         tipoHolograma: "compuesto"
     },
     {
@@ -78,7 +78,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Mapa2.jpg",
         imagenPie: "FIG 1.4 — Comparativa satelital de recuperación de biomasa vegetal.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Compuesto.glb",
         tipoHolograma: "compuesto"
     },
 
@@ -134,7 +134,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/coihue_Fase1.jpg",
         imagenPie: "FIG 2.1 — Corte transversal de corteza de Coigüe con micro-pústulas vasculares activas.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Coihue.glb",
         tipoHolograma: "planta"
     },
     {
@@ -160,7 +160,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Zorro_Fase1.jpg",
         imagenPie: "FIG 2.2 — Imagen captada por un empleado de servicio de la zona P-09. Zorro Culpeo con erupciones dérmicas iniciales de Fase 1. Primera evicendia de mutacion",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Zorro.glb",
         tipoHolograma: "fase1"
     },
     {
@@ -212,7 +212,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Jabali_Fase3.jpg",
         imagenPie: "FIG 2.4 — Imagen tomada por el sistema de seguridad del scto P-07, de un Jabalí en Fase 3 mostrando brotes tentaculares y licuefacción tisular.",
-        modeloGLB: null, // Reemplazar por ej. "models/jabali.glb"
+        modeloGLB: "models/Modelo_Jabali.glb", // Reemplazar por ej. "models/jabali.glb"
         tipoHolograma: "fase3"
     },
     {
@@ -237,7 +237,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Puma_Fase4.jpg",
         imagenPie: "FIG 2.5 — Imagen proporcionada por el agente J8L-sen. G.O.M. Epsilon-11, quien abatio al sujeto 402.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Puma.glb",
         tipoHolograma: "fase4"
     },
     {
@@ -263,7 +263,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Desconocido_Fase5.jpg",
         imagenPie: "FIG 2.6 — Imagen recuperada de la camara del agente de campo T5L-satr. G.O.M. Gamma-13. Fue encontrada en el ultimo lugar donde se tuvo contacto con el agente.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Desconocido.glb",
         tipoHolograma: "fase5"
     },
 
@@ -326,7 +326,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/V_Incompleto.jpg",
         imagenPie: "FIG 5.1 — Modelo estructural del Compuesto 001 evidenciando huecos de enlace sin correspondencia orgánica.",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_Virus.glb",
         tipoHolograma: "compuesto"
     },
     {
@@ -356,7 +356,7 @@ const ARCHIVOS_DB = [
         `,
         imagenURL: "img/Masa_Semi-critica.jpg",
         imagenPie: "FIG 5.2 — Evidencia visual del estado del sujeto 009 tras el ataque de reducción #19. Proporcionada por el agente en jefe L1L-mast. G.O.M. Tau-5",
-        modeloGLB: null,
+        modeloGLB: "models/Modelo_MasaSC.glb",
         tipoHolograma: "masa"
     }
 ];
