@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO NATURA // TERMINAL INTERNA — KRATINES.INC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+<body>
+    <!-- Efecto CRT -->
+    <div class="crt-overlay"></div>
+
+    <!-- ================= PANTALLA DE LOGIN ================= -->
+    <section id="login-screen" class="screen active">
+        <div class="login-box">
+            <div class="corp-header">
+                <span class="corp-logo">◈ PROYECTO NATURA</span>
+                <span class="sys-ver">KRATINES.INC // NODO PATAGONIA-SUR</span>
+            </div>
+
+            <div class="boot-log">
+                <p>> CONECTANDO CON SERVIDOR AISLADO: DIVISIÓN ECOLÓGICA KRATINES...</p>
+                <p>> SECTOR ACTIVO: RESERVA EXPERIMENTAL AUSTRAL (MES +06)</p>
+                <p class="warning-text">> AVISO LEGAL: DOCUMENTACIÓN SUJETA A ACUERDO DE CONFIDENCIALIDAD ESTRICTA. TODA CONSULTA QUEDA AUDITADA.</p>
+            </div>
+
+            <form id="login-form">
+                <label for="password-input">INGRESE CREDENCIAL DE ACCESO:</label>
+                <div class="input-group">
+                    <span class="prompt-symbol">></span>
+                    <input type="password" id="password-input" placeholder="••••••••••••" autocomplete="off" required>
+                    <button type="submit" class="btn-terminal">INGRESAR</button>
+                </div>
+                <p id="login-error" class="error-msg hidden">ERROR: CREDENCIAL RECHAZADA. INTENTO REGISTRADO POR SEGURIDAD INTERNA.</p>
+            </form>
+
+            <div class="hacked-note">
+                <strong>[CREDENCIAL RECUPERADA]:</strong> Tarjeta de investigador de campo (Nivel 4): <code>NATURA-04</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TERMINAL PRINCIPAL ================= -->
+    <section id="terminal-screen" class="screen hidden">
+        <header class="terminal-header">
+            <div class="header-left">
+                <span class="corp-logo-sm" title="Proyecto Natura — Kratines.INC">◈ PROYECTO NATURA</span>
+                <span class="divider">|</span>
+                <span class="status-indicator"><span class="pulse-dot"></span> RED AISLADA — KRATINES.INC</span>
+            </div>
+            <div class="header-right">
+                <div class="clearance-badge" id="clearance-badge-box">
+                    AUTORIZACIÓN: <strong id="user-clearance-display">CLASE 4 (INVESTIGACIÓN DE CAMPO)</strong>
+                </div>
+                <button id="logout-btn" class="btn-sm">CERRAR SESIÓN</button>
+            </div>
+        </header>
+
+        <div class="terminal-body">
+            <!-- Panel Izquierdo -->
+            <aside class="sidebar">
+                <div class="search-box">
+                    <label for="search-input">// BUSCADOR DE REGISTROS</label>
+                    <input type="text" id="search-input" placeholder="Buscar por ID, especie, fase o palabra...">
+                </div>
+
+                <div class="folders-section">
+                    <div class="section-title">// DIRECTORIOS AISLADOS</div>
+                    <ul id="folder-list" class="folder-list"></ul>
+                </div>
+
+                <div class="files-section">
+                    <div class="section-title">// EXPEDIENTES (<span id="file-count">0</span>)</div>
+                    <ul id="file-list" class="file-list"></ul>
+                </div>
+            </aside>
+
+            <!-- Panel Derecho -->
+            <main class="viewer-panel">
+                <div id="empty-viewer" class="empty-state">
+                    <div class="ascii-logo">[ ARCHIVO CENTRAL — PROYECTO NATURA ]</div>
+                    <p>Sesión iniciada con credencial <strong>CLASE 4</strong>. Los registros de <strong>CÚPULA DIRECTIVA (CLASE 5)</strong> y los fragmentos confidenciales permanecen bloqueados o redactados.</p>
+                    <p class="sub-hint">Propiedad exclusiva de Kratines.INC — División de Restauración Ambiental.</p>
+                </div>
+
+                <!-- Vista de Archivo Bloqueado (Clase 5) -->
+                <div id="locked-viewer" class="locked-state hidden">
+                    <div class="lock-icon">🔒</div>
+                    <h2>ACCESO RESTRINGIDO // NIVEL 5 REQUERIDO</h2>
+                    <p class="locked-file-title" id="locked-file-title"></p>
+                    <div class="security-warning">
+                        <p>ESTE ARCHIVO PERTENECE AL REPOSITORIO DE LA <strong>CÚPULA DIRECTIVA DE KRATINES.INC (CLASE 5)</strong>.</p>
+                        <p>Su credencial actual (<strong>CLASE 4</strong>) no cuenta con permisos de lectura ni descifrado para este registro.</p>
+                        <p class="blink-red">>> ADVERTENCIA: LOS INTENTOS DE ELEVACIÓN NO AUTORIZADOS ACTIVAN PROTOCOLOS DE CONTENCIÓN <<</p>
+                    </div>
+                </div>
+
+                <!-- Vista de Documento Desbloqueado -->
+                <div id="document-content" class="document-content hidden">
+                    <div class="doc-header">
+                        <div>
+                            <span id="doc-id" class="doc-id">NAT-000</span>
+                            <h1 id="doc-title">Título del Documento</h1>
+                        </div>
+                        <div class="doc-meta">
+                            <span id="doc-clearance" class="badge">CLASE 4</span>
+                            <span id="doc-status" class="badge status">ESTADO</span>
+                            <span id="doc-date" class="meta-date">FECHA: --/--/----</span>
+                        </div>
+                    </div>
+
+                    <div class="doc-tabs">
+                        <button class="tab-btn active" data-tab="tab-text">📄 DOCUMENTO</button>
+                        <button class="tab-btn" data-tab="tab-image">👁️ REGISTRO VISUAL</button>
+                        <button class="tab-btn" data-tab="tab-3d">🧊 ESCANEO 3D</button>
+                    </div>
+
+                    <!-- Pestaña 1: Texto -->
+                    <div id="tab-text" class="tab-pane active">
+                        <div id="doc-body-text" class="doc-text-container"></div>
+                        <div class="doc-signature">
+                            <span>AUTENTICACIÓN DE DOCUMENTO: <strong>KRATINES.INC</strong> // DIVISIÓN PROYECTO NATURA</span>
+                            <span id="doc-sig-level">CLASIFICACIÓN INTERNA</span>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 2: Imagen -->
+                    <div id="tab-image" class="tab-pane hidden">
+                        <div class="image-frame">
+                            <img id="doc-image" src="" alt="Registro Visual Clasificado">
+                            <p id="doc-image-caption" class="image-caption"></p>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 3: Modelo 3D -->
+                    <div id="tab-3d" class="tab-pane hidden">
+                        <div class="viewer-3d-wrapper">
+                            <div class="viewer-3d-hud">
+                                <span id="viewer-3d-label">MODO: RECONSTRUCCIÓN MORFOLÓGICA 3D</span>
+                                <span>ARRASTRAR PARA ROTAR | RUEDA PARA ZOOM</span>
+                            </div>
+
+                            <model-viewer
+                                id="custom-glb-viewer"
+                                class="hidden"
+                                src=""
+                                alt="Modelo 3D del Espécimen"
+                                auto-rotate
+                                camera-controls
+                                shadow-intensity="1"
+                                background-color="#04080c">
+                            </model-viewer>
+
+                            <div id="procedural-3d-container" class="procedural-3d"></div>
+
+                            <div class="viewer-3d-footer">
+                                <button id="toggle-wireframe-btn" class="btn-sm">ALTERNAR MALLA (WIREFRAME)</button>
+                                <button id="toggle-rotation-btn" class="btn-sm">PAUSAR/REANUDAR GIRO</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ================= CONSOLA SECRETA (ROOT) ================= -->
+    <div id="secret-console" class="secret-console hidden">
+        <div class="console-window">
+            <div class="console-header">
+                <span>// CONSOLA DE MANTENIMIENTO INTERNO — KRATINES.INC</span>
+                <button id="close-console-btn" class="btn-sm">CERRAR [ESC]</button>
+            </div>
+            <div id="console-output" class="console-output">
+                <p>> SHELL DE DEPURACIÓN LOCAL ACTIVA (NODO PATAGONIA-SUR).</p>
+                <p>> ESCRIBA "HELP" PARA COMANDOS DE DIAGNÓSTICO O INGRESE UN COMANDO DE ANULACIÓN.</p>
+            </div>
+            <form id="console-form" class="console-input-bar">
+                <span class="prompt-symbol">natura@kratines:~#</span>
+                <input type="text" id="console-input" placeholder="Ingresar comando..." autocomplete="off">
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= PANTALLA FINAL (BLOQUEO TOTAL) ================= -->
+    <div id="breach-ending-screen" class="breach-screen hidden">
+        <div class="breach-box">
+            <div class="breach-alert-icon">⚠️</div>
+            <div class="breach-code">KRATINES.INC // PROTOCOLO DE SEGURIDAD CARMESÍ</div>
+            <h1>DISPOSITIVO VULNERADO</h1>
+            <p class="breach-message">
+                Se detectó que este dispositivo ha sido vulnerado. Escuadrones operativos de eliminación están en camino para eliminar al infiltrado.
+            </p>
+            <div class="breach-trace-data">
+                <p>> ORIGEN DE BRECHA: <strong>ELEVACIÓN ILÍCITA A CLASE 5 (PROYECTO NATURA)</strong></p>
+                <p>> RASTREO DE UBICACIÓN: <strong>CONFIRMADO (100%)</strong></p>
+                <p>> BLOQUEO REMOTO DE TERMINAL: <strong>PERMANENTE</strong></p>
+            </div>
+            <div class="breach-footer">
+                [ TERMINAL CONGELADA POR SEGURIDAD INTERNA DE KRATINES.INC — FIN DE LA TRANSMISIÓN ]
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
